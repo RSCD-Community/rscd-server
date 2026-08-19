@@ -1,0 +1,35 @@
+# World map calibration.
+#
+# The client turns a game coordinate into a pixel in worldmap.png with
+#
+#    px = origin_x - scale * gameX
+#    py = origin_y + scale * gameY
+#
+# x is subtracted because game x grows westward while pixels grow eastward:
+# the map is a mirror of the coordinate space, not a translation of it.
+#
+# A world that ships its own worldmap.png ships its own numbers here. If this
+# file is missing the client falls back to exactly the values below, which were
+# measured against the vanilla landscape rather than guessed: a land/water mask
+# was rendered straight out of Landscape.rscd and fitted against the coastline
+# in the PNG (IoU 0.886 over the main continent, 0.951 over the wilderness),
+# then checked a second way by projecting the client's own town bounding boxes
+# and confirming all thirteen ground-level towns land on their own towns.
+#
+# 3506 / 768 = 4.5651 exactly. The map is 768 tiles wide.
+
+scale=4.5651
+origin_x=3500.0
+origin_y=-453.2
+
+# The Kharazi jungle is drawn as a pulled-out inset: the artist put a sea
+# between it and Shilo that does not exist in the game (the two are one
+# landmass; you walk straight from one into the other) so the crossing
+# lines had somewhere to live. The inset is the true render at true scale,
+# just moved. Measured against two hard features: the Holy Water pool
+# (game 417-418 x 889-890, drawn centred at pixel 1604,3786) and the
+# easternmost evil totem (game 367,888, label row dead on the prediction).
+# Anyone inside the rectangle gets the nudge; the rectangle starts at
+# y=863 because everything north of that is mainland drawn in its true
+# place.
+region=330,863,520,944,10,178.5

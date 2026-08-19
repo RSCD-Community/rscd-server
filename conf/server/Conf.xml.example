@@ -1,0 +1,139 @@
+# RSCD game server configuration.
+#
+# java.util.Properties format despite the .xml name -- that is what
+# org.rscdaemon.server.util.Config.loadProperties reads, and the name is the
+# one Server.main defaults to. Pass a different path as argv[0] to override.
+#
+# There used to be a second one of these, world.xml at the tree root, reached
+# only through build.xml's runserver target. The two disagreed about the server
+# key, the client version and the registry URL, so which of them you got
+# decided whether the world could announce itself and which clients could log
+# in. This is the only one now.
+#
+# Every key is optional; anything omitted falls back to the value compiled into
+# Config. The values below are those defaults, written out so there is one
+# place to look rather than a class to read.
+
+# ---------------------------------------------------------------------------
+# This world
+# ---------------------------------------------------------------------------
+
+# The name this world announces to the community world list, and the name a
+# player sees on the Worlds screen and in the "Welcome to ..." login message.
+# Anyone else running this server is expected to change it -- the registry
+# rejects "rscd official", "official rscd", "jagex" and "runescape", but not
+# this, so two worlds called RSCD Community can be listed at once. 48
+# characters is the registry's limit.
+server_name     = RSCD Community
+server_num      = 1
+server_location = US
+max_players     = 75
+
+# Two addresses, and they are not interchangeable. server_ip is what the
+# server BINDS to, so a hostname that no longer resolves throws
+# UnresolvedAddressException before the server can start -- which is what the
+# original build's ignisisle.no-ip.org does now. address is what this world
+# tells the world list to send players to.
+server_ip   = 127.0.0.1
+address     = 127.0.0.1
+server_port = 43594
+
+# The same game protocol wrapped in WebSocket framing, for browser clients.
+# Plain ws:// -- for wss://, terminate TLS at a reverse proxy and forward the
+# raw stream here. Set to 0 to turn the browser door off entirely.
+ws_port     = 43595
+
+# PlayerLogin rejects with code 4 ("client has been updated") when the client
+# reports a lower version than this. Our client reports 1218
+# (mudclient.java:686), so 1200 lets it in and turns away anything older.
+#
+# world.xml had this at 10, lowered during testing so a foreign "Revamped V10"
+# client could connect. That is not a client this project ships, and the number
+# also goes to the registry as the world's protocol field, so it is back to
+# meaning what it says.
+server_version  = 1200
+
+# ---------------------------------------------------------------------------
+# Rates
+# ---------------------------------------------------------------------------
+#
+# Authentic RSC is exp_mult 1 with no subscriber bonus at all. The original
+# build ran 15x with a hardcoded +10 for subscribers and made everyone a
+# subscriber -- none of which existed in RuneScape Classic. Kept as settings
+# rather than deleted, but defaulting to the real game.
+#
+# Read these carefully before changing them: experience is granted as
+# (exp_mult + subscriber_exp_mult), so the subscriber figure is a BONUS ADDED
+# ON TOP, not a multiplier of its own. Its "no bonus" value is 0. Setting it to
+# 1 does not mean "subscribers get normal rate" -- it doubles their experience.
+# With everyone_subscriber = true, that is every account on the world, and
+# nothing announces it at login, so the only way to notice is ::myrate. This
+# world shipped at 2x for exactly that reason.
+
+exp_mult            = 1
+subscriber_exp_mult = 0
+everyone_subscriber = true
+
+# The ObjectBuilder and NPCBuilder windows, which collect the XML for anything
+# a moderator spawns with ::npc and ::object. World-building tools; off on a
+# real server. The original build opened both on every boot, which made an X
+# display a requirement of starting the game at all. With them off the commands
+# still work and write their XML to the log instead.
+builder_windows = false
+
+# ---------------------------------------------------------------------------
+# Login server
+# ---------------------------------------------------------------------------
+#
+# The only process that talks to the database; this one reaches it over the LS
+# protocol. Must match ls_ip and ls_port in conf/ls/Conf.xml.
+
+ls_ip   = localhost
+ls_port = 34522
+
+# ---------------------------------------------------------------------------
+# Community world list
+# ---------------------------------------------------------------------------
+#
+# All optional, and off by default. With heartbeat = false this server makes no
+# outbound connection at all and nothing else in this section is read.
+
+# This world's identity to the registry. Never shown to players and never sent
+# anywhere except as a hash. Every copy of the server ships with the placeholder
+# below, so a world running on it would share one listing with every other --
+# which is why the server refuses to start on it. It generates a real key,
+# writes it here, and asks you to restart; there is nothing to invent.
+#
+# Back it up with your database. Replacing a key that has been in use makes a
+# new listing: the old one goes stale and drops off, every player who
+# favourited you loses the favourite, and every one of them re-downloads your
+# cache on next login.
+server_key = change-me-before-first-boot
+
+# Set to true to appear in the client's Worlds screen. What gets sent is this
+# file's name, address, port, world number and max_players, plus the current
+# player total -- nothing about any individual player.
+heartbeat = false
+
+api_url = https://api.rscd-community.org/heartbeat.php
+
+# Where this world's cache lives. Clients download it on first join and again
+# when it changes, so a world can ship its own maps, items and models without
+# anybody needing a different client. Empty means the client uses its own.
+cache_url =
+
+# The WebSocket address browser clients connect on, if you run the bridge. A
+# browser cannot open a raw TCP socket, so the in-browser client needs this
+# instead of the game port. Must be wss:// -- the registry rejects ws:// rather
+# than storing it, because a browser on an https:// page refuses to open an
+# insecure socket anyway and the failure would be silent.
+#
+# Empty means "no bridge", and every client falls back to host:port+1, which is
+# where the bridge listens by default. Only set it if yours is somewhere else,
+# behind a reverse proxy at a path, say.
+ws_url =
+
+# The two lines the client shows above the login boxes once a player has picked
+# this world. Empty falls back to "Welcome to <server_name>".
+welcome1 =
+welcome2 =

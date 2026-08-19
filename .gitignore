@@ -1,0 +1,39 @@
+# Live config -- never commit. Both have a .example beside them; copy it and
+# fill it in. conf/ls/Conf.xml holds the database password, and
+# conf/server/Conf.xml holds this world's server_key, which is what proves to
+# the registry that a listing is yours.
+conf/ls/Conf.xml
+conf/server/Conf.xml
+
+# Machine-local launcher environment.
+run.local.env
+
+# Build output
+build/
+build-test/
+*.class
+rscd.jar
+
+# Runtime
+logs/
+*.log
+
+# Tooling debris
+__pycache__/
+*.pyc
+*~
+*.swp
+.DS_Store
+
+# Toolkit backups: written beside the file they replace, on the box that ran
+# the edit. Local safety nets, not repository content.
+*.pre-toolkit
+
+# The toolkit also leaves the uncompressed form beside the .gz it wrote.
+# The .gz is the file the server reads and the file this repository tracks.
+conf/server/locs/*.xml
+
+# Local data tooling and its audit scratch -- not part of the public repo.
+test/
+tools/
+*.bak-*

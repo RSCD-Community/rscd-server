@@ -1,0 +1,746 @@
+<NpcHandler-array>
+		<NpcHandler>
+			<!-- Standalone flavor NPCs with no quest tie -- see FlavorNpcs.java. -->
+			<ids>
+				<!-- 5 Hans (Lumbridge castle courtyard) and 133 Head chef
+				     (cooking guild). Both were spawned with nothing wired to
+				     them; the head chef's guild door already spoke for him in
+				     WallObjectAction, but talking to him did nothing. Neither
+				     is claimed by a quest. -->
+				<int>5</int>
+				<int>133</int>
+				<!-- 13 Camel, 231 Master Crafter, and the three mining guild
+				     dwarves 191/94/699. The Master Crafter's two entry gates
+				     are NOT repeated here: they already fire from the guild
+				     door (WallObjectAction case 68), and he stands inside the
+				     guild, so the only way to reach him is to have passed
+				     both. 140 and 139 are the two Monks of Zamorak whose lines
+				     were recorded; 293 is the third and is deliberately absent
+				     because his was not. See FlavorNpcs.java. -->
+				<int>13</int>
+				<int>231</int>
+				<int>191</int>
+				<int>94</int>
+				<int>699</int>
+				<int>140</int>
+				<int>139</int>
+				<int>622</int>
+				<int>573</int>
+				<!-- 219 Fairy Lunderwin (Zanaris market, buys cabbages) and
+				     518 Colonel Radick (west end of Yanille, challenges you
+				     friend or foe). Neither appeared in any handler list or
+				     any quest, and both have a complete recorded
+				     conversation. -->
+				<int>219</int>
+				<int>518</int>
+				<int>397</int>
+				<int>448</int>
+				<!-- 590 Brimstail moved to the Rune mysteries quest,
+				     which keeps his chanting refusal for anyone who
+				     hasn't finished it and adds the essence teleport
+				     for anyone who has. -->
+			</ids>
+			<className>org.rscdaemon.server.npchandler.FlavorNpcs</className>
+		</NpcHandler>
+		<NpcHandler>
+			<!-- 71 silk trader (Al Kharid) and 326 silk merchant (East
+			     Ardougne). Both were on FlavorNpcs with dialogue and prices
+			     that were invented whole; rebuilt on the recorded
+			     conversations, including the Ardougne haggle, which is the
+			     part that was missing entirely. Family Crest never
+			     associates 71, so the "adam fitzharmon" branch lives in the
+			     handler and asks the quest for its state, the way Gerrant
+			     does. See SilkTrade.java. -->
+			<ids>
+				<int>71</int>
+				<int>326</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.SilkTrade</className>
+		</NpcHandler>
+		<NpcHandler>
+			<!-- Six shop owners moved off ShopKeeper because their recorded
+			     conversations do not fit through it: a second greeting line,
+			     a reply on the refusal, a line between the acceptance and the
+			     stock appearing, and a spoken line that differs from the menu
+			     entry. 336 Aemad and 337 Kortan share the East Ardougne
+			     adventurers' store, 331 Zenesha, 330 gem merchant, 329 spice
+			     merchant, 661 Chadwell. Their Shops.xml rows keep the stock
+			     and prices; the greeting and options rows there are no longer
+			     read. See ShopTalk.java. -->
+			<ids>
+				<int>336</int>
+				<int>337</int>
+				<int>331</int>
+				<int>330</int>
+				<int>329</int>
+				<int>661</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.ShopTalk</className>
+		</NpcHandler>
+		<NpcHandler>
+			<!-- The Spirit of Scorpius, on his grave north of the Observatory.
+			     The only source of the unholy symbol mould and the only way to
+			     bless the finished symbol; both halves of the crafting chain
+			     between them were already built and neither end was reachable.
+			     See SpiritOfScorpius.java. -->
+			<ids>
+				<int>665</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.SpiritOfScorpius</className>
+		</NpcHandler>
+		<NpcHandler>
+			<!-- Murphy, the Fishing Trawler minigame -- see FishingTrawler.java. -->
+			<ids>
+				<int>733</int>
+				<int>734</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.FishingTrawler</className>
+		</NpcHandler>
+		<NpcHandler>
+			<!-- Gnome Ball, at the Tree Gnome Stronghold -- see
+			     GnomeBall.java. Referee, Goalie, Cheerleader and the
+			     Gnome Baller npcs all had no purpose wired at all before
+			     this.
+
+			     625, the Official, added 2026-08-07. He is the one who
+			     explains how the game is played, and he was silent, so
+			     the rules existed only in the code enforcing them.
+
+			     609 and 610 were REMOVED the same day, deliberately.
+			     They are the two gnomes in orange -- your own team --
+			     and NPCDef marks them out twice over, "He's on your
+			     team" and attackable=false, against "A tree gnome ball
+			     player" and attackable=true for the other twelve. They
+			     were in this list, so your own side tackled you and
+			     took the ball. Talking to a teammate should pass them
+			     the ball, which is a mechanic we have not built, so
+			     they are unwired rather than wired to the wrong thing.
+			     Do not put them back without the pass. -->
+			<ids>
+				<int>596</int>
+				<int>601</int>
+				<int>611</int>
+				<int>625</int>
+				<int>595</int>
+				<int>597</int>
+				<int>598</int>
+				<int>599</int>
+				<int>600</int>
+				<int>602</int>
+				<int>603</int>
+				<int>604</int>
+				<int>605</int>
+				<int>606</int>
+				<int>607</int>
+				<int>608</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.GnomeBall</className>
+		</NpcHandler>
+		<NpcHandler>
+			<!-- Thordur, the Black Hole Experience. See ThordurHandler for the
+			     history and why this exists at all -- RSCD never built it,
+			     despite Thordur (175) and the Disk of Returning (387,
+			     already carrying its "spin" command) both sitting in the
+			     def data unused. -->
+			<ids>
+				<int>175</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.ThordurHandler</className>
+		</NpcHandler>
+		<NpcHandler>
+			<!-- The ferries. 166/170/171 Port Sarim to Karamja, 163 the
+			     Musa Point customs officer back, 316 Ardougne to
+			     Brimhaven and 317 its customs official. Boat.java is a
+			     rewrite of the inherited version, which greeted every
+			     sailor alike and offered a free ride to seven places
+			     across the map; it now charges the 30gp fare and searches
+			     for Karamja rum on the two restricted routes.
+
+			     280 Arhein and 764 Gujuo were in this list in v25 and are
+			     not sailors. Arhein refuses to carry passengers, which is
+			     a step of Merlin's crystal, and Gujuo belongs to Legend's
+			     quest. Both are handled by those quests now.
+
+			     This block was listed twice, identically, until 2026-08-04.
+			     Same class either way, so nothing behaved differently. -->
+			<ids>
+				<int>166</int>
+				<int>170</int>
+				<int>171</int>
+				<int>163</int>
+				<int>316</int>
+				<int>317</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.Boat</className>
+		</NpcHandler>
+		<NpcHandler>
+			<!-- 485, the Tutorial Island Bank assistant, used to be in this
+			     list, which meant he opened a bank and said none of his own
+			     lines. He belongs to quests/TutorialIsland.java now: his only
+			     spawns are on the island, and his script opens the bank
+			     itself when the player asks for it. -->
+			<ids>
+				<int>95</int>
+				<int>224</int>
+				<int>268</int>
+				<int>540</int>
+				<int>617</int>
+				<int>792</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.Bankers</className>
+		</NpcHandler>
+		<NpcHandler>
+			<ids>
+				<int>172</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.Tanner</className>
+		</NpcHandler>
+		<NpcHandler>
+			<ids>
+				<int>90</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.KebabSeller</className>
+		</NpcHandler>
+		<NpcHandler>
+			<ids>
+				<int>339</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.MakeOverMage</className>
+		</NpcHandler>
+		<NpcHandler>
+			<ids>
+				<int>160</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.Thrander</className>
+		</NpcHandler>
+		<NpcHandler>
+			<ids>
+				<int>167</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.Gerrant</className>
+		</NpcHandler>
+		<NpcHandler>
+			<ids>
+				<int>54</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.Aubury</className>
+		</NpcHandler>
+		<NpcHandler>
+			<!-- Everyone who opens a shop. ShopKeeper looks the shop up by
+			     the tile the npc is standing on, not by id, so this list
+			     only says "this npc sells things"; which shop is in
+			     locs/Shops.xml.
+
+			     228 Gaius was listed twice here, as far back as the v25
+			     source. Removed 2026-08-04; the second entry never did
+			     anything the first had not. -->
+			<ids>
+				<int>51</int>
+				<int>55</int>
+				<int>56</int>
+				<int>82</int>
+				<int>83</int>
+				<int>87</int>
+				<int>88</int>
+				<int>105</int>
+				<int>106</int>
+				<int>130</int>
+				<int>143</int>
+				<int>145</int>
+				<int>146</int>
+				<int>168</int>
+				<int>169</int>
+				<int>185</int>
+				<int>186</int>
+				<int>222</int>
+				<int>223</int>
+				<int>371</int>
+				<int>391</int>
+				<int>528</int>
+				<int>58</int>
+				<!-- 54 Aubury moved to his own handler: shop plus Rune
+				     mysteries plus the essence teleport, the Gerrant
+				     arrangement. -->
+				<int>173</int>
+				<int>250</int>
+				<int>155</int>
+				<int>289</int>
+				<int>149</int>
+				<int>131</int>
+				<int>129</int>
+				<int>141</int>
+				<int>115</int>
+				<int>69</int>
+				<int>59</int>
+				<int>48</int>
+				<int>228</int>
+				<int>230</int>
+				<int>101</int>
+				<int>773</int>
+				<int>75</int>
+				<int>157</int>
+				<int>1</int>
+				<int>84</int>
+				<int>85</int>
+				<int>103</int>
+				<int>165</int>
+				<int>328</int>
+				<int>325</int>
+				<int>514</int>
+				<int>522</int>
+				<int>620</int>
+				<int>793</int>
+				<int>113</int>
+				<int>156</int>
+				<int>297</int>
+				<!-- 624 is Yanni Salika, the antique dealer in Shilo village. He
+				     is not a shopkeeper: he buys the Shilo village artifacts
+				     through dialogue. Whoever built Shops.xml generated the
+				     "Shilo Fishing Store" bounds from Yanni's npc roam box
+				     (411-415, 833-835) instead of Fernahei's (393-397, 835-839),
+				     so 624 was registered here and 616 was not. An npc handler
+				     beats quest dispatch in TalkToNpcHandler, so Yanni could
+				     never be talked to. Shop bounds corrected, 624 swapped for
+				     616 (Fernahei, who actually runs the fishing hut). -->
+				<int>616</int>
+				<int>788</int>
+				<!-- 621 Kaleb (Paramaya Inn, Shilo Village), 235 Fat Tony
+				     (pizza, Wilderness Bandit Camp), 780 the Varrock tea
+				     seller, 398 bolkoy (Tree Gnome Village general store),
+				     587 Gulluck (Grand Tree weapon shop) -- all plain
+				     shopkeepers with no quest tie, had no purpose wired at
+				     all before this. -->
+				<int>621</int>
+				<int>235</int>
+				<int>780</int>
+				<int>398</int>
+				<int>587</int>
+				<!-- 779 is Siegfried Erkle, whose Legends' Guild shop refuses
+				     anyone who has not finished Legend's quest. ShopKeeper is
+				     generic and has no gate, so his stock was on open sale.
+				     Moved to SiegfriedErkle below. Fionella (788), one floor
+				     down, has no gate and stays here. -->
+				<int>269</int>
+				<!-- The twelve shopkeepers whose shops RSCD never had. Their
+				     Shops.xml entries were added with the rest of the missing
+				     shop table; until then every one of these npcs was spawned
+				     in the world with nothing wired to it at all.
+				       233 Noterazzo   Bandit Camp General Store
+				       112 Valaine     Champion's Store
+				       278 Davon       Davon's Amulet Store
+				       220 Jakut       Dragon Sword Shop
+				       530 Frenita     Frenita's Cooking Shop
+				       327 Fur trader  Fur Stall
+				       686 Ogre merch. Grud's herblaw stall
+				       687 Ogre trader Ogre trader General Store
+				       532 rometti     Rometti's fashion outlet
+				       218 Irksol      Ruby Ring Shop
+				       501 Tailor      Tailor's fancy dress
+				     None of the twelve is associated with a quest or listed
+				     under another handler, so none of them trips the
+				     handler-beats-quest rule.
+				     Two more shops in the same batch stay out of here on
+				     purpose: Alfonse (260) belongs to Hero's Quest, which
+				     already offers to take an order and was only waiting for
+				     the Shrimp and Parrot to exist, and the chamber guardian
+				     (784) belongs to Mage Arena. -->
+				<int>233</int>
+				<int>112</int>
+				<int>278</int>
+				<int>220</int>
+				<int>530</int>
+				<int>327</int>
+				<int>686</int>
+				<int>687</int>
+				<int>532</int>
+				<int>218</int>
+				<int>501</int>
+				<!-- 183 Scavvo, Scavvo's Rune Store, upstairs in the Champions'
+				     Guild. A pure registration gap rather than a missing
+				     feature: his shop row in Shops.xml.gz is complete (greeting
+				     "Ello matey", all three options, declineOption 0) and his
+				     spawn at (150,1506) sits inside the shop's own coordinate
+				     box (148-152, 1504-1507), so ShopKeeper needs nothing but
+				     his id. ShopKeeper.java was in fact written with him in
+				     mind -- the comment about an npc whose two different
+				     options both open the shop names him. He is not associated
+				     with any quest and appears under no other handler. -->
+				<int>183</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.ShopKeeper</className>
+		</NpcHandler>
+		<NpcHandler>
+			<ids>
+				<int>225</int>
+				<int>226</int>
+				<int>227</int>
+				<int>466</int>
+				<int>467</int>
+				<int>299</int>
+				<int>341</int>
+				<int>369</int>
+				<int>370</int>
+				<!-- 144 is Doric, who gives out Doric's quest, not a certer.
+				     Certing beat quest dispatch, so his quest was dead. His
+				     ore certs are still in NpcCerters.xml, commented. -->
+				<!-- 347 Bonzo and 348 Forester were here too, and were the
+				     same mistake as Doric: they are Fishing Contest's npcs,
+				     so the competition could not be entered and the Forester
+				     could not be got past. Their NpcCerters entries are left
+				     in place, unreferenced, exactly as Doric's are.
+
+				     794 Rick and 795 Edde were also here. They were not
+				     Jagex npcs at all -- RSCD invented them as certers -- and
+				     they no longer exist.
+
+				     231 Master Crafter was here too, certing gold and silver
+				     ore in the Crafting Guild. Nothing records him as a
+				     certer: vanilla's own examine text sends both those
+				     certificates to Draynor market, and the only two ore
+				     certers were Giles there and jinno in Zanaris. Removed
+				     2026-08-04 with his NpcCerters entry.
+
+				     778 Sidney Smith moved to her own handler below. She was
+				     never a stall certer -- none of this handler's dialogue
+				     is hers -- and she was missing two of her six goods. -->
+				<int>267</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.Certer</className>
+		</NpcHandler>
+		<NpcHandler>
+			<ids>
+				<int>778</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.SidneySmith</className>
+		</NpcHandler>
+		<NpcHandler>
+			<ids>
+				<int>93</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.MonkHealer</className>
+		</NpcHandler>
+		<NpcHandler>
+			<!-- 176 Brother Jered, Monastery. The only source of a blessed holy
+			     symbol (item 385) in the game, and he was unwired -- so the
+			     unblessed one, which has a prayer bonus of 0, was the end of
+			     the line. No level or quest gate on the blessing itself: the
+			     31 Prayer needed to reach him belongs to the stairs. -->
+			<ids>
+				<int>176</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.BrotherJered</className>
+		</NpcHandler>
+		<NpcHandler>
+			<!-- 174 Abbot Langley, the Monastery. He runs the place and said
+			     nothing. His stairs-gate scene is NOT here -- that is an object
+			     interaction on staircase 198 at (251,468) and it speaks through
+			     him from ObjectAction. This handler is his general talk: the
+			     greeting, the heal and the small talk. See AbbotLangley.java
+			     for why the heal is 5 and why npc 93's MonkHealer was left at
+			     10 rather than quietly changed to match. -->
+			<ids>
+				<int>174</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.AbbotLangley</className>
+		</NpcHandler>
+		<NpcHandler>
+			<!-- The three crowd npcs with random chat tables: Man, Pirate,
+			     Barbarian. Sixty-odd wandering npcs between them, every one of
+			     them silent before this.
+			       11  Man          "One of runescapes many citizens"
+			       72  Man          "One of Runescapes many citizens"
+			      318  Man          "One of Runescape's citizens"  (Ardougne)
+			      137  Pirate       F2P
+			      264  Pirate       level 30, shares the one table
+			       76  Barbarian
+			     The three Man examines differ from each other exactly as the
+			     wiki records them, sic and all, which is what identifies these
+			     three out of the six npcs named "Man". The other three are
+			     Straven (24, Shield of Arrav), a Murder Mystery npc (750) and
+			     the nobleman (307), and none of them belongs here -- two of
+			     the outcomes in this table start a fight and one hands over an
+			     item, so a wrong id would break a quest. See RandomChat.java,
+			     which also explains why the special outcomes are rare and why
+			     that rate is ours rather than Jagex's. -->
+			<ids>
+				<int>11</int>
+				<int>72</int>
+				<int>318</int>
+				<int>137</int>
+				<int>264</int>
+				<int>76</int>
+				<!-- Rogue, the three Warriors and the Thief use the Man's table
+				     outright: their transcript pages are 28-byte redirects to
+				     Transcript:Man, and all three articles state that they
+				     "use the same dialogue as Men, and as a result, might
+				     randomly attack the player or give a Flier when spoken
+				     to". So the fight and the flier come with them.
+				       342  Rogue    deep wilderness, 6 spawns
+				        86  Warrior  Al Kharid palace, 9
+				       159  Warrior  Varrock palace, 2
+				       320  Warrior  Ardougne palace, 10
+				        64  Thief    14 spawns
+				     351, the other npc named Thief, is NOT here. He is the
+				     Ardougne sewers blanket thief that Monk's Friend takes its
+				     blanket from. That quest is not built yet, so nothing
+				     references him today -- which is precisely what was true
+				     of Straven before he nearly got this table by mistake. -->
+				<int>342</int>
+				<int>86</int>
+				<int>159</int>
+				<int>320</int>
+				<int>64</int>
+				<!-- 63 Farmer, F2P, same redirect. 319 is the members Farmer
+				     ("An humble peasant") and is a different npc -- do not add
+				     it here on the strength of the shared name. Note that 63
+				     and 64 rest on the redirect alone, without the explicit
+				     "same dialogue as Men" sentence the Rogue and Warrior
+				     articles carry; RandomChat.java spells out that split. -->
+				<int>63</int>
+				<!-- 352 Head Thief. Not a redirect -- the wiki keeps its own
+				     copy, titled "Standard dialogue" -- but 17 of his 19 recorded
+				     lines are already verbatim in this table. The two that are
+				     not are logged in RandomChat.java rather than added, because
+				     the evidence points to them being thief-specific and adding
+				     them here would hand them to every Man in the game. -->
+				<int>352</int>
+				<!-- Shipyard workers, Tree Gnome. 558 has 2 spawns, 559 has
+				     15, all inside the yard. 557 is DELIBERATELY ABSENT:
+				     the wiki infobox groups it with 558 but it has one
+				     spawn, at the shipyard gate, and The Grand Tree owns it
+				     as GATE_WORKER for the ka-lu-min password scene. Wiring
+				     it here would take NPC_TALK from the quest and lock the
+				     player out of the shipyard. -->
+				<int>558</int>
+				<int>559</int>
+				<!-- Gnome locals, Tree Gnome Village and Stronghold. 592 has 31
+				     spawns and 593 has 27 -- 58 npcs, the largest silent
+				     population that was left in the game. They get SEPARATE
+				     tables, not a shared one: the transcript is split into
+				     sections headed "Level 9 gnome local" and "Level 3 gnome
+				     local", and NPCDef backs it with 9/9/9/9 against 3/3/3/3.
+				     Neither is claimed by a quest -- Tree Gnome Village's own
+				     locals are 399 and 402, which are not these and are not
+				     registered here. 593's table gives a King worm; that was
+				     checked against the shops and the cooking tables before it
+				     shipped and it has no economic sink. See RandomChat.java. -->
+				<int>592</int>
+				<int>593</int>
+				<!-- Gnome children, 33 spawns. THREE tables, not one: the
+				     transcript's sections are headed by appearance, and NPCDef
+				     carries the colours. 585 is the only child in the game with
+				     green (#00FF00) and section 2 is the section that names
+				     green; 591 is the only unattackable child and section 1 is
+				     the section that says unattackable; 586 takes section 3,
+				     where its pink-over-blue matches too. 583 is a FOURTH child
+				     and is deliberately absent -- yellow over red, matching no
+				     heading, and zero spawns in NpcLoc, so no player has ever
+				     met it. See RandomChat.java. -->
+				<int>585</int>
+				<int>586</int>
+				<int>591</int>
+				<!-- Gnome troop, 31 spawns on the Tree Gnome Village
+				     battlefield. Its transcript is laid out by quest stage like
+				     Local gnome 399 and Kalron 402, but its six sections hold
+				     only three texts and they run A,B,A,C,B,C -- backwards twice
+				     under any linear stage model, ordinary as six draws from a
+				     three-entry table. Those other two ARE staged and live in
+				     TreeGnomeVillage.java; this one does not. Full argument on
+				     RandomChat.GNOME_TROOP. Note the quest does not claim npc
+				     409, so this registration takes nothing away from it -- and
+				     409 as a GameObject is the open khazard chest, which the
+				     quest does claim. Different namespaces, no conflict. -->
+				<int>409</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.RandomChat</className>
+		</NpcHandler>
+		<NpcHandler>
+			<!-- The four Gnome Trainers on the Gnome Stronghold agility course,
+			     nine spawns, all silent until now. Four fixed conversations, not
+			     random tables. The transcript has six headings for four npcs
+			     because two were recorded twice; which trainer says which is
+			     settled by course geometry against ObjectAgility course 1, and
+			     for 579 confirmed a second time by NpcPickpocket -- its table is
+			     headed "Pickpocketable trainers" and 579 is the only one of the
+			     four with a thieving entry. Six further recorded lines are
+			     shouted DURING obstacles and are deliberately not here: an
+			     ObjectAgilityDef has no npc and no way to speak, so those need a
+			     framework change rather than a dialogue addition. See
+			     GnomeTrainers.java. -->
+			<ids>
+				<int>576</int>
+				<int>577</int>
+				<int>578</int>
+				<int>579</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.GnomeTrainers</className>
+		</NpcHandler>
+		<NpcHandler>
+			<ids>
+				<int>275</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.KingArthur</className>
+		</NpcHandler>
+		<NpcHandler>
+			<ids>
+				<int>212</int>
+				<!-- 213, the monk on Entrana, added 2026-08-07. He was
+				     spawned and wired to nothing, so his nine-line warning
+				     about the dungeon below existed only on a wiki page.
+				     He is NOT a ferryman: 212 runs the boat from Port
+				     Sarim, 213 stands either side of the dungeon ladder.
+				     See EntranaMonks.java for the two gaps that leaves --
+				     no boat back, and the ladder not gated on the warning
+				     -- neither of which was invented over. -->
+				<int>213</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.EntranaMonks</className>
+		</NpcHandler>
+		<!--
+		    Removed 2026-08-03. Everything that used to sit here was RSCD's own
+		    content, and it is gone with the npcs it spoke for.
+
+		    Fourteen handlers were registered: Fisherman (368 Master fisher),
+		    Sharon (798), Info (818 Guthix), FirstQuest (727 Student),
+		    FirstQuest1 (728 Archaeological expert), MattSpirit (665 Spirit of
+		    Scorpius), DefGuy (649 Iban), Gamble (362/363 guardian of Armadyl),
+		    ArenaTele (221 Doorman), Alfonso (265 Jailer), Team1 (800),
+		    Team2 (801), Fiddy (802 "50 Cent"), Paris (803 "Paris Hilton").
+
+		    Four more sat here commented out -- Teleporter, TrainSpotQuest,
+		    ShadiTele, GrimTele -- each unregistered earlier for taking a quest
+		    npc. Their classes are deleted now too, so the notes go with them.
+
+		    Six of these beat a quest to its own npc: TalkToNpcHandler asks for a
+		    handler first and only falls through to the quest when there is none,
+		    so Digsite (727, 728), Fishing Contest (347, 348, via Certer above)
+		    and Temple of Ikov (362, 363) could not be played at all. Those npcs
+		    now reach their quests.
+
+		    The npcs that only existed for this content -- 794 to 818, everything
+		    past Jagex's 794 definitions -- were removed from NPCDef.xml.gz along
+		    with their 16 spawns and their NpcCerters entries.
+		-->
+		<NpcHandler>
+			<ids>
+				<int>116</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.Wyson</className>
+		</NpcHandler>
+		<NpcHandler>
+			<ids>
+				<int>125</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.Aggie</className>
+		</NpcHandler>
+		<NpcHandler>
+			<ids>
+				<int>124</int>
+				<!-- 194 is the SAME character on the ship and a different npc
+				     entirely: two spawns, one on each ship interior, and silent
+				     until now. Ned.java branches on the id. -->
+				<int>194</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.Ned</className>
+		</NpcHandler>
+		<NpcHandler>
+			<ids>
+				<int>161</int>
+				<int>162</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.BorderGuard</className>
+		</NpcHandler>
+		<NpcHandler>
+			<ids>
+				<int>444</int>
+				<int>445</int>
+				<int>451</int>
+				<int>491</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.Mourners</className>
+		</NpcHandler>
+		<NpcHandler>
+			<ids>
+				<int>779</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.SiegfriedErkle</className>
+		</NpcHandler>
+		<NpcHandler>
+			<!-- Everyone who works the Shantay Pass. 549 Shantay, 720 his two
+			     assistants, 717 the guards on their rounds and 719 the one
+			     standing on the gate. Shantay was on ShopKeeper, which could
+			     only sell -- he has a great deal more to say than a shop
+			     greeting, and the pass, the poster, the disclaimer and the
+			     cell all hang off these four. No quest claims any of them,
+			     so nothing is shadowed by registering them here; Tourist
+			     trap starts with Irena (538), the other side of the gate.
+			     See ShantayPass.java. -->
+			<ids>
+				<int>549</int>
+				<int>717</int>
+				<int>719</int>
+				<int>720</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.ShantayPass</className>
+		</NpcHandler>
+		<NpcHandler>
+			<!-- The four Grand Tree shops -- Heckel funch, Hudo glenfad, the
+			     Blurberry barman and the Gnome waiters. Not ShopKeeper:
+			     their roam boxes overlap each other, so the shops are
+			     opened by name rather than by tile. See GnomeShops.java. -->
+			<ids>
+				<int>535</int>
+				<int>537</int>
+				<int>580</int>
+				<int>581</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.GnomeShops</className>
+		</NpcHandler>
+		<NpcHandler>
+			<!-- Every bartender in the game. None of the ten was registered
+			     anywhere before this, so no inn in Classic could be bought
+			     from, even though the drinks themselves have always had
+			     working "drink" cases. Six of them also sign the Alfred
+			     Grimhand barcrawl card -- see quests/BarCrawl.java and
+			     model/BarCrawlCard.java. Not ShopKeeper: an inn is dialogue
+			     with a price in it, not a shop counter, and none of the ten
+			     has a Shops.xml entry.
+
+			     150, the Rusty Anchor, stays here even though GoblinDiplomacy
+			     also associateNpc's it: this handler is one of the Rusty
+			     Anchor's six barcrawl bars (BarCrawlCard.RUSTY_ANCHOR), which
+			     the quest class does not reimplement, so removing it would
+			     drop the black skull ale / card-signing branch of Alfred
+			     Grimhand's barcrawl. Bartenders.rustyAnchorPicked instead
+			     reports the rumour to the quest via QuestManager.note(), the
+			     same route SpellHandler and PlayerAppearanceUpdater already
+			     use for GodCharges and Tutorial Island. 382, the Khazard
+			     bartender, was removed: FightArena.bartender() already
+			     reimplements its whole menu (beer, khali brew, news) and
+			     Khazard is not one of the six barcrawl bars, so the quest's
+			     associateNpc dispatch can take over cleanly. -->
+			<ids>
+				<int>12</int>
+				<int>44</int>
+				<int>142</int>
+				<int>150</int>
+				<int>279</int>
+				<int>306</int>
+				<int>340</int>
+				<int>520</int>
+				<int>529</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.Bartenders</className>
+		</NpcHandler>
+		<NpcHandler>
+			<!-- 794 Party Hall Guard, both spawns, in front of the hall in
+			     Seers' Village. Ours rather than Jagex's: they explain why
+			     telekinetic grab does not work inside, which is otherwise a
+			     rule the player only meets as a spell that refuses to fire.
+			     See PartyHall.java and Point.inPartyHall(). -->
+			<ids>
+				<int>794</int>
+			</ids>
+			<className>org.rscdaemon.server.npchandler.PartyHall</className>
+		</NpcHandler>
+</NpcHandler-array>

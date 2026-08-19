@@ -1,0 +1,17 @@
+/*
+ * Decompiled with CFR 0.152.
+ */
+package org.rscdaemon.server.event;
+
+import org.rscdaemon.server.event.SingleEvent;
+import org.rscdaemon.server.model.Player;
+
+public abstract class ShortEvent
+extends SingleEvent {
+    public ShortEvent(Player owner) {
+        super(owner, 1500);
+    }
+
+    public abstract void action();
+}
+

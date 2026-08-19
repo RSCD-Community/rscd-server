@@ -1,0 +1,62 @@
+# RSCD login server configuration -- TEMPLATE.
+#
+# Copy to Conf.xml, beside this file, and fill in. Conf.xml is gitignored
+# because it holds a real database password; this template is the file that
+# ships.
+#
+# java.util.Properties format. Passed to org.rscdaemon.ls.Server as argv[0].
+#
+# The login server is the only process that talks to the database. The game
+# server reaches it over the LS protocol on ls_port -- see the architecture
+# notes in the README before assuming otherwise.
+
+
+# ---- required ----
+#
+# These two have NO compiled-in default and the server will not start without
+# them. That is deliberate: a credential with a fallback is a credential that
+# ends up committed. Everything else below is optional.
+
+mysql_user = rscd
+mysql_pass = CHANGEME
+
+
+# ---- optional: the database ----
+#
+# Shown with their defaults; delete any line you do not need to change.
+
+mysql_host = 127.0.0.1
+mysql_port = 3306
+mysql_db   = rscd
+
+# How the connection is protected.
+#
+#   0  off -- the password and every row cross the network in clear
+#   1  TLS, and the server's certificate is verified
+#   2  TLS, accepting whatever certificate the server presents  (default)
+#
+# 2 is the default because MySQL generates a SELF-SIGNED certificate on first
+# start, so mode 1 fails against a stock server with "unable to find valid
+# certification path". Mode 2 stops someone reading the traffic; it does NOT
+# stop someone impersonating the server.
+#
+# For real protection: copy the server's ca.pem, import it into a keystore, set
+# mysql_truststore to that file, and switch to mode 1.
+#
+#   keytool -importcert -alias mysql -file ca.pem \
+#           -keystore mysql-ca.jks -storepass changeit
+#
+mysql_tls = 2
+# mysql_truststore      = mysql-ca.jks
+# mysql_truststore_pass = changeit
+
+
+# ---- optional: networking ----
+
+# Where the login server listens for game worlds.
+ls_ip   = localhost
+ls_port = 34522
+
+# Status/query endpoint.
+query_ip   = localhost
+query_port = 8181
